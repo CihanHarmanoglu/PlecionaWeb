@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@CrossOrigin (origins = "http://localhost:63342")
 @RequestMapping("/products")
 public class ProductController {
     private final ProductService productService;
@@ -25,4 +26,15 @@ public class ProductController {
     public Product addProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
+
+    // DELETE Mapping for deleting a product by ID
+    @DeleteMapping("/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
+    }
+    @PutMapping("/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
+        return productService.updateProduct(id, updatedProduct);
+    }
+
 }
